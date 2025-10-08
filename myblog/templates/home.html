@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Головна - My Blog{% endblock %}
+
+{% block content %}
+<h1 class="mb-4">Пости</h1>
+
+{% for post in posts %}
+<div class="card mb-3 shadow-sm">
+    <div class="card-body">
+        <h3>
+            <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
+        </h3>
+        <p class="text-muted">Автор: {{ post.author }} | {{ post.created_at }}</p>
+        <p>{{ post.content|truncatechars:120 }}</p>
+        <a href="{% url 'post_detail' post.id %}" class="btn btn-primary btn-sm">Читати далі</a>
+    </div>
+</div>
+{% empty %}
+<p>Немає постів 😕</p>
+{% endfor %}
+
+{% endblock %}
